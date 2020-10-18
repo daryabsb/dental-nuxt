@@ -1,10 +1,10 @@
 // import axios from '@nuxtjs/axios';
-const state = () => ( {
+const state = () => ({
     patients: [],
 });
 
 const mutations = {
-    'GET_PATIENTS'(state, payload){
+    'GET_PATIENTS' (state, payload) {
         state.patients = payload
     }
 };
@@ -35,6 +35,7 @@ const actions = {
     async nuxtServerInit({ state, commit }, { app }) {
 
         let csrftoken = app.$cookiz.get('csrftoken');
+        console.log(csrftoken);
 
         const options = {
             headers: {
@@ -42,35 +43,38 @@ const actions = {
                 "X-CSRFToken": csrftoken
             }
         };
-        let url = "http://172.16.10.49:8000/api/patients/";
+        let url = "http://127.0.0.1:8000/api/patients/";
         // console.log(url);
 
         try {
-    
-          const allPatients = await this.$axios.get(url, options);
-          console.log(allPatients.data)
-          commit("GET_PATIENTS", allPatients.data);
-        //   console.log(allPatients.data)
-          
-    
+
+            const allPatients = await this.$axios.get(url, options);
+            console.log(allPatients.data)
+            commit("GET_PATIENTS", allPatients.data);
+            //   console.log(allPatients.data)
+
+
         } catch (err) {
-          console.log(err);
+            console.log(err);
         }
-        
-      }
-      /*,
+
+    }
+    /*,
     addToCart({ commit }, payload){
         commit('ADD_TO_CART', payload)
     }*/
 }
 
 const getters = {
-    patients(state){
+    patients(state) {
         return state.patients
     }
 
 }
 
-export default{
-    state, mutations, actions, getters
+export default {
+    state,
+    mutations,
+    actions,
+    getters
 };

@@ -1,4 +1,5 @@
 <template>
+
     <div class="container-fluid">
                     <!-- Page-Title -->
                     <div class="row">
@@ -38,23 +39,23 @@
                                         <div class="col-lg-4 ml-auto">
                                             <p>
                                                 <span class="personal-detail-title">Name</span> 
-                                                <span class="personal-detail-info">Rosa Dodson</span>
+                                                <span class="personal-detail-info">{{patient.name}}</span>
                                             </p> 
                                             <p>
-                                                <span class="personal-detail-title">Admit Date</span> 
-                                                <span class="personal-detail-info">09/07/2019</span>
+                                                <span class="personal-detail-title">Birth Date</span> 
+                                                <span class="personal-detail-info">{{patient.dob}}</span>
                                             </p> 
                                             <p>
                                                 <span class="personal-detail-title">Phone No</span> 
-                                                <span class="personal-detail-info">+1 234 567 890</span>
+                                                <span class="personal-detail-info">{{patient.phone}}</span>
                                             </p> 
                                             <p>
-                                                <span class="personal-detail-title">Address</span> 
-                                                <span class="personal-detail-info">225  Rose Street, Dublin, California</span>
+                                                <span class="personal-detail-title">Email</span> 
+                                                <span class="personal-detail-info">{{patient.email}}</span>
                                             </p> 
                                             <p>
                                                 <span class="personal-detail-title">Doctor Name</span> 
-                                                <span class="personal-detail-info">Dr.Wendy Keen (MS Orthopaedic)</span>
+                                                <span class="personal-detail-info">Dr.{{patient.doctor}} (MS Orthopaedic)</span>
                                             </p> 
                                         </div><!--end col--> 
                                     </div><!--end row-->
@@ -193,19 +194,17 @@
                 </div>
 </template>
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapState, mapActions, mapGetters } from 'vuex'
 export default {
-    components: {
-        },
-    methods: {
-        
-    },
+    
     computed: {
-        patients(params){
-            let patients = this.$store.state.patients
-            let patient = patients.find(patient=> patient.id === params.id)
-            return patient
-        }
+       patient() {
+           const id = this.$route.params.id;
+           let patients = this.$store.state.patients
+           const patient = patients.find(p=>p.id = id)
+           console.log(patient)
+           return patient
+       }
     },
 }
 </script>

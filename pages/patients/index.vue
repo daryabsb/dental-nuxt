@@ -93,7 +93,7 @@ export default {
     methods: {
         
     },
-    computed: {
+    mounted: {
         patients(){
             return this.$store.state.patients
         }
